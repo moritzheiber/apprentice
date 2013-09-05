@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'apprentice'
+
+sentinel = Apprentice::Sentinel.new
+sentinel.run
