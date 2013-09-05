@@ -14,7 +14,6 @@ module Galera
 
   def run_checks
     get_galera_status
-    p @status
     unless @status.empty?
       response = {code: 200, text: []}
       if !check_cluster_size
