@@ -1,12 +1,20 @@
 module Galera
   def get_galera_status
     begin
-      result = @client.query "SHOW STATUS LIKE 'wsrep_%';"
+      client = Mysql2::Client.new(
+          host: @server,
+          port: @sql_port,
+          username: @user,
+          password: @password,
+          as: :array
+      )
+      result = client.query "SHOW STATUS LIKE 'wsrep_%';"
       if result.count > 0
         result.each do |r|
           @status.merge!(Hash[*r])
         end
       end
+      client.close
     rescue Exception => message
       puts message
     end

@@ -15,20 +15,6 @@ module Server
       @password = options.password
       @donor_allowed = options.donor_allowed
       @status = {}
-
-      begin
-        @client = Mysql2::Client.new(
-            host: @server,
-            port: @sql_port,
-            username: @user,
-            password: @password,
-            as: :array,
-            reconnect: true
-        )
-      rescue Exception => message
-        puts message
-        EM.stop_server
-      end
     end
 
     def receive_data(data)
