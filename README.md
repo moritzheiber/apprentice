@@ -48,7 +48,14 @@ By itself, Apprentice doesn't do aynthing all that useful. However, it accommoda
 
 ## Goodies
 
-I've included an (untested) init.d script which you may use in order to start Apprentice at boot time.
+### Init-script
+I've included an init.d script, `ruby-apprentice.init` which you may use in order to start Apprentice at boot time. The init-script needs a file named `ruby-apprentice` inside the directory `/etc/defaults/`. An example file is included with the repository, aptly named `ruby-apprentice.default`.
+
+    $ mv ruby-apprentice.init /etc/init.d/ruby-apprentice
+    $ chmod +x /etc/init.d/ruby-apprentice
+    $ mv ruby-apprentice.defaults /etc/defaults/
+
+Now you just need to add the relevant information for starting Apprentice. The defaults file is pretty self explanatory.
 
 ## TODO
 
