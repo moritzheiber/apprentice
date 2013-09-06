@@ -10,7 +10,9 @@
 
 NAME="`basename ${0/.sh/}`"
 DAEMON="`which apprentice`"
-PIDFILE="/var/run/${NAME}.pid"
+PIDFILE="/var/run/${NAME}/${NAME}.pid"
+USER=nobody
+GROUP=nogroup
 
 [ -r /etc/default/${NAME} ] && source /etc/default/${NAME}
 
@@ -28,7 +30,7 @@ do_start()
     if [ ! "${START}" = "true" ]; then
       log_failure_msg "this service is disabled. Enable it in /etc/default/$NAME"
       return 2
-    elif [ ! "${SERVER}" ] || [ ! "${PASSWORD}" ] || [ ! ${USER} ] ; then
+    elif [ ! "${DBHOST}" ] || [ ! "${DBPASSWORD}" ] || [ ! ${DBUSER} ] ; then
       log_failure_msg "Missing variables inside defaults file."
       return 2
     fi
@@ -39,11 +41,13 @@ do_start()
     chown $USER:$GROUP "$pidfile_dirname"
     chmod 0750 "$pidfile_dirname"
 
-    DAEMON_ARGS="--password ${PASSWORD} --user ${USER} --server ${SERVER} ${EXTRA_ARGS}"
+    DAEMON_ARGS="--password ${DBPASSWORD} --user ${DBUSER} --server ${DBHOST} ${EXTRA_ARGS}"
 
     start-stop-daemon --start --background --make-pidfile --quiet \
+	    --user ${USER} --group ${GROUP} \
             --pidfile ${PIDFILE} --exec ${DAEMON} --test > /dev/null || return 1
     start-stop-daemon --start --background --make-pidfile --quiet \
+	    --user ${USER} --group ${GROUP} \
             --pidfile ${PIDFILE} --exec ${DAEMON} -- ${DAEMON_ARGS} || return 2
     log_end_msg $?
 }

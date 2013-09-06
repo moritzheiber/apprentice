@@ -1,0 +1,9 @@
+# Set to true to start the service
+START=false
+
+# MariaDB host
+DBHOST=''
+# Username which shall be used to check the status
+DBUSER=''
+# Password
+DBPASSWORD=''
