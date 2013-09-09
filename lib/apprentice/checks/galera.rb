@@ -1,4 +1,6 @@
 module Galera
+  STATES = {1 => 'Joining',2 => 'Donor/Desynced',3 => 'Joined',4 => 'Synced'}
+
   def get_galera_status
     begin
       client = Mysql2::Client.new(

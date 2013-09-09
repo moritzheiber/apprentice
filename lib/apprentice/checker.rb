@@ -2,7 +2,6 @@ module Checker
   require 'apprentice/checks/galera'
   include Galera
 
-  STATES = {1 => 'Joining',2 => 'Donor/Desynced',3 => 'Joined',4 => 'Synced'}
   CODES = {200 => 'OK',503 => 'Service Unavailable'}
 
   def format_text(texts)
