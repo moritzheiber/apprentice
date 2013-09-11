@@ -4,8 +4,6 @@ module Server
     require 'mysql2/em'
     include Checker
 
-    attr_accessor :client
-
     def initialize(options)
       @ip = options.ip
       @port = options.port
@@ -14,6 +12,8 @@ module Server
       @user = options.user
       @password = options.password
       @donor_allowed = options.donor_allowed
+      @type = options.type
+      @threshold = options.threshold
       @status = {}
     end
 

@@ -1,8 +1,15 @@
 module Checker
-  require 'apprentice/checks/galera'
-  include Galera
 
   CODES = {200 => 'OK',503 => 'Service Unavailable'}
+
+  case @type
+    when 'galera'
+      require 'apprentice/checks/galera'
+      include Galera
+    when 'mysql'
+      require 'apprentice/checks/mysql'
+      include Mysql_Checks
+  end
 
   def format_text(texts)
     value = ''
