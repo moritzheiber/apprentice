@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Apprentice::VERSION
   spec.authors       = 'Moritz Heiber'
   spec.email         = %w{moritz.heiber@gmail.com}
-  spec.description   = 'A MariaDB cluster integrity checker'
-  spec.summary       = 'Check given servers for consistency and replication status'
+  spec.description   = 'A MariaDB/MySQL slave lag and cluster integrity checker'
+  spec.summary       = 'Checks a given server for consistency and replication status'
   spec.homepage      = 'http://github.com/moritzheiber/apprentice'
   spec.license       = 'MIT'
 
