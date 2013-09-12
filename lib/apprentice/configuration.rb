@@ -1,7 +1,34 @@
 require 'optparse'
 require 'ostruct'
 
+# This module contains all the command line configuration methods
 module Configuration
+
+  # Reads ARGV with OptionParser and return an OpenStruct object with the parsed values
+  #
+  # ==== Default values
+  #
+  # * +ip+ - By default Apprentice binds to 0.0.0.0.
+  # * +port+ - The port Apprentice binds to. It defaults to 3307.
+  # * +sql_port+ - The port the MariaDB/MySQL server listens on Apprentice connects to. Defaults to 3306.
+  # * +threshold+ - The acceptable slave lag in seconds. Defaults to 120 seconds. It only applies when the type is set to 'mysql'.
+  # * +accept_donor+ - If passed, cluster members in the state '2' aka "Donor/Desynced" are accepted as valid client providers. Defaults to false, which is recommended.
+  #
+  # ==== Attributes
+  #
+  # * +ARGV+
+  #
+  # ==== Return values
+  #
+  # * +options+ - OpenStruct object containing all options passed with ARGV
+  #
+  # ==== Example
+  #
+  #    ARGV = "--user user --password password --server server"
+  #    opt = get_config
+  #    opt.user     # => 'user'
+  #    opt.password # => 'password'
+  #    opt.server   # => 'server'
   def get_config
     options = OpenStruct.new
     options.ip = '0.0.0.0'
@@ -55,6 +82,12 @@ module Configuration
 
     begin
       opt_parser.parse!(ARGV)
+
+      # We need four variables:
+      # * user: a valid mysql user
+      # * password: the corresponding password
+      # * server: the server to connect to
+      # * type: either mysql or galera, depending on the setup
       unless options.server &&
           options.user &&
           options.password &&
@@ -71,6 +104,24 @@ module Configuration
     end
   end
 
+  # Check the user input for a valid type
+  #
+  # ==== Attributes
+  #
+  # * +type+ - the type extracted from ARGV
+  #
+  # ==== Return values
+  #
+  # Either true or false, depending on whether the input provided
+  # matches either 'mysql' or 'galera'
+  #
+  # ==== Example
+  #
+  #    r = check_type('mysql')
+  #    r.inspect # => 'true'
+  #
+  #    r = check_type('something else')
+  #    r.inspect # => 'false'
   def check_type(type)
     %w{galera mysql}.each do |t|
       return true if t == type
