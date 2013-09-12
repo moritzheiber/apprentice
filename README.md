@@ -76,8 +76,6 @@ Now you just need to add the relevant information for starting Apprentice. The d
 
 ## TODO
 
-* Write better (r)docs. I'm sorry for the abysmal state they're in right now
-* Be a lot more forgiving when it comes to SQL connection errors/reconnects/server going awol.
 * Finish the rspec definitions. Sorry for missing out on those as well.
 * Maybe integrate a logger
 * Write a better init script
