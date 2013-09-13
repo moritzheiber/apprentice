@@ -3,7 +3,7 @@ module Galera
 
   # Galera knows {a couple of different states}[http://www.percona.com/doc/percona-xtradb-cluster/wsrep-status-index.html#wsrep_local_state].
   # This constant describes their respective meaning for user feedback and, possibly, logging purposes.
-  STATES = {1 => 'Joining',2 => 'Donor/Desynced',3 => 'Joined',4 => 'Synced'}
+  STATES = {1 => 'Joining', 2 => 'Donor/Desynced', 3 => 'Joined', 4 => 'Synced'}
 
   # Gets the actual status from the Galera cluster member using the Mysql2 gem.
   # Notice that we're using the EventMachine-enabled Mysql2::Client.
