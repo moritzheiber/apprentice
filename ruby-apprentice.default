@@ -1,9 +1,17 @@
 # Set to true to start the service
 START=false
 
-# MariaDB host
+# MariaDB/MySQL host
 DBHOST=''
 # Username which shall be used to check the status
 DBUSER=''
 # Password
 DBPASSWORD=''
+# Type of server
+# This should either by 'mysql' for MariaDB/MySQL slave lag detection
+# or 'galera' for cluster member consistency checking
+TYPE=''
+# You can specify any other arguments you want to
+# Example: '--threshold 60' for an accepted slave lag of 60 seconds
+# For more options see 'apprentice --help'
+EXTRA_ARGS=''
