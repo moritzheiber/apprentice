@@ -2,6 +2,12 @@
 
 Apprentice is tiny server application (under 300 lines of ruby code) that determines the integrity of a running [MariaDB/MySQL slave](https://mariadb.com/kb/en/replication-overview/) or [MariaDB Galera master-master cluster member](https://mariadb.com/kb/en/what-is-mariadb-galera-cluster/) and responds to HTTP requests on a pre-defined port, depending on the state of the server it is checking on.
 
+## How to install?
+
+    $ gem install apprentice
+    
+Alternatively, you can clone the sources and use [gem2deb](https://github.com/ln/gem2deb) in order to create a viable Debian package. I might be able to provide updated Debian packages for Debian/Ubuntu in the future.
+
 ## How does it work?
 
 You can find out about the syntax by running `apprentice --help`:
@@ -76,6 +82,8 @@ Now you just need to add the relevant information for starting Apprentice. The d
 
 ## TODO
 
-* Finish the rspec definitions. Sorry for missing out on those as well.
-* Maybe integrate a logger
+* Rspec definitions (Sorry :/)
+* Global configuration yaml file
+* Integrate a logger
 * Write a better init script
+* Postgresql support has been requested
